@@ -18,61 +18,29 @@ function FileUpload({ teamId, userId }) {
     try {
       setUploading(true);
 
-      // 1️⃣ Get Firebase token
+      // Get Firebase token
       const token = await getIdToken(user);
 
-      // 2️⃣ Ask backend for Cloudinary signature (when available)
-      // ⚠️ Replace "YOUR_BACKEND_URL" when backend is live
-      const signResponse = await axios
-        .post(
-          "http://localhost:5000/api/cloudinary-sign",
-          { fileName: file.name, fileType: file.type },
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
-        .catch(() => {
-          console.warn("Backend not ready — skipping signature request");
-          return { data: {} }; // avoid breaking while backend is missing
-        });
-
-      const { signature, timestamp, apiKey, cloudName } = signResponse.data;
-
-      // 3️⃣ Upload to Cloudinary (mock for now)
-      // When backend ready, remove "demo" section
+      // Prepare form data
       const formData = new FormData();
       formData.append("file", file);
-      if (apiKey) {
-        formData.append("api_key", apiKey);
-        formData.append("timestamp", timestamp);
-        formData.append("signature", signature);
-      }
+      formData.append("teamId", teamId);
+      formData.append("userId", userId);
 
-      const cloudRes = await axios.post(
-        `https://api.cloudinary.com/v1_1/${
-          cloudName || "demo"
-        }/auto/upload`,
-        formData
+      // Send file to backend
+      const response = await axios.post(
+        "https://hackathon-portal-project.onrender.com/api/files/upload",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
-      const uploadedUrl = cloudRes.data.secure_url;
-
-      // 4️⃣ Send metadata to backend
-      await axios
-        .post(
-          "http://localhost:5000/api/files",
-          {
-            userId,
-            teamId,
-            fileName: file.name,
-            fileType: file.type,
-            fileUrl: uploadedUrl,
-          },
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
-        .catch(() =>
-          console.warn("Backend not ready — skipping file metadata save")
-        );
-
       alert("✅ File uploaded successfully!");
+      console.log("File URL:", response.data.fileUrl);
     } catch (err) {
       console.error("File upload failed:", err);
       alert("Upload failed. Check console for details.");
