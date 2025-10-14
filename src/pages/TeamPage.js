@@ -3,11 +3,11 @@ import FileUpload from "../components/FileUpload";
 import axios from "axios";
 import "./TeamPage.css";
 
-function TeamPage() {
-  const [user, setUser] = useState(null);
-  const [team, setTeam] = useState(null);
-  const [updates, setUpdates] = useState([]);
-  const [newUpdate, setNewUpdate] = useState("");
+export default function TeamPage() {
+  const [user, setUser] = useState(null); // logged-in user
+  const [team, setTeam] = useState(null); // team data
+  const [updates, setUpdates] = useState([]); // team updates
+  const [newUpdate, setNewUpdate] = useState(""); // input for new update
 
   useEffect(() => {
     // Load logged-in user from localStorage
@@ -19,41 +19,32 @@ function TeamPage() {
       axios
         .get(`https://hackathon-portal-project.onrender.com/api/teams/${loggedUser.teamId}`)
         .then((res) => {
-          setTeam(res.data); // backend should send team info including members, mentor, etc.
-          setUpdates(res.data.updates || []); // optional: if backend has updates
+          setTeam(res.data);
+          setUpdates(res.data.updates || []);
         })
-        .catch((err) => {
-          console.error("Failed to fetch team:", err);
-          setTeam(null);
-        });
+        .catch((err) => console.error("Failed to fetch team:", err));
     }
   }, []);
 
+  // Add new team update
   const handleAddUpdate = () => {
     if (!newUpdate.trim()) return;
 
-    // Optimistic update (show immediately)
     const updatedList = [...updates, newUpdate];
     setUpdates(updatedList);
     setNewUpdate("");
 
-    // Send update to backend
     axios
-      .post(
-        `https://hackathon-portal-project.onrender.com/api/teams/${team.id}/updates`,
-        { message: newUpdate }
-      )
+      .post(`https://hackathon-portal-project.onrender.com/api/teams/${team.id}/updates`, { message: newUpdate })
       .catch((err) => console.error("Failed to send update:", err));
   };
 
+  // Leave team
   const handleLeaveTeam = () => {
     if (!team) return;
     if (window.confirm("Are you sure you want to leave the team?")) {
       axios
-        .post(
-          `https://hackathon-portal-project.onrender.com/api/teams/${team.id}/leave`,
-          { userId: user.id }
-        )
+        .post(`https://hackathon-portal-project.onrender.com/api/teams/${team.id}/leave`, { userId: user.id })
         .then(() => {
           setTeam(null);
           alert("You have left the team.");
@@ -71,29 +62,23 @@ function TeamPage() {
   return (
     <div className="team-container">
       <div className="team-card">
-        {/* Team header */}
         <div className="team-header">
           <h1 className="team-title">{team.name}</h1>
           <p className="team-description">{team.description}</p>
         </div>
 
-        {/* Leader */}
         <div className="team-section">
           <h3>Team Leader</h3>
           <p><strong>{team.leader}</strong></p>
         </div>
 
-        {/* Members */}
         <div className="team-section">
           <h3>Team Members</h3>
           <ul className="member-list">
-            {team.members.map((member, index) => (
-              <li key={index}>{member}</li>
-            ))}
+            {team.members.map((member, index) => <li key={index}>{member}</li>)}
           </ul>
         </div>
 
-        {/* Mentor */}
         <div className="team-section">
           <h3>Mentor</h3>
           <p>
@@ -102,13 +87,11 @@ function TeamPage() {
           </p>
         </div>
 
-        {/* File upload */}
         <div className="team-section">
           <h3>Upload Team Files</h3>
           <FileUpload teamId={team.id} userId={user.id} />
         </div>
 
-        {/* Updates */}
         <div className="team-section">
           <h3>Team Updates</h3>
           <div className="update-input">
@@ -129,13 +112,11 @@ function TeamPage() {
           </ul>
         </div>
 
-        {/* Presentation schedule */}
         <div className="team-section">
           <h3>Presentation Schedule</h3>
           <p>{team.presentationTime}</p>
         </div>
 
-        {/* Leave team */}
         <div className="team-section">
           <button onClick={handleLeaveTeam} className="leave-team-button">Leave Team</button>
         </div>
@@ -143,5 +124,3 @@ function TeamPage() {
     </div>
   );
 }
-
-export default TeamPage;

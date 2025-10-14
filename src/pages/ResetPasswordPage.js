@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { auth } from "../firebase/config"; // firebase auth
+import { Link } from "react-router-dom";
 import './ResetPasswordPage.css';
 
-function ResetPasswordPage() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+export default function ResetPasswordPage() {
+  const [email, setEmail] = useState(""); // email input
+  const [message, setMessage] = useState(""); // feedback message
 
+  // handle form submit
   const handleReset = async (e) => {
     e.preventDefault();
     try {
@@ -19,23 +21,21 @@ function ResetPasswordPage() {
 
   return (
     <div className="reset-password-container">
-  <h2>Reset Password</h2>
-  <form onSubmit={handleReset}>
-    <input
-      type="email"
-      placeholder="Your email"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      required
-    />
-    <button type="submit">Send Link</button>
-  </form>
-  {message && <p className="message">{message}</p>}
-  <p className="back-to-login">
-    <a href="/login">Back to Login</a>
-  </p>
-</div>
+      <h2>Reset Password</h2>
+      <form onSubmit={handleReset}>
+        <input
+          type="email"
+          placeholder="Your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <button type="submit">Send Link</button>
+      </form>
+      {message && <p className="message">{message}</p>}
+      <p className="back-to-login">
+        <Link to="/login">Back to Login</Link>
+      </p>
+    </div>
   );
 }
-
-export default ResetPasswordPage;

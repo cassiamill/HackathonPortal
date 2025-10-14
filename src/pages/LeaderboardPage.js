@@ -1,18 +1,17 @@
-// LeaderboardPage.js
 import React, { useEffect, useState } from "react";
-import { auth } from "../firebase/config"; // Keep your Firebase auth
-import axios from "axios"; // We'll fetch leaderboard from backend
+import { auth } from "../firebase/config"; // firebase auth
+import axios from "axios"; // for backend requests
 import './LeaderboardPage.css';
 
 export default function LeaderboardPage() {
-  const [leaderboard, setLeaderboard] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [accessDenied, setAccessDenied] = useState(false);
+  const [leaderboard, setLeaderboard] = useState([]); // store teams
+  const [loading, setLoading] = useState(true); // loading state
+  const [accessDenied, setAccessDenied] = useState(false); // admin check
 
   useEffect(() => {
     const user = auth.currentUser;
 
-    // Simple admin check for now (replace with backend role check later)
+    // check if user is admin (simple check)
     const adminEmail = "coordinator@example.com";
     if (!user || user.email !== adminEmail) {
       setAccessDenied(true);
@@ -20,16 +19,23 @@ export default function LeaderboardPage() {
       return;
     }
 
-    // Fetch leaderboard from backend (replace URL with actual backend later)
-    axios.get("http://localhost:5000/leaderboard") // backend endpoint
-      .then(res => {
-        setLeaderboard(res.data);
+    // fetch leaderboard from backend
+    const fetchLeaderboard = async () => {
+      try {
+        const token = await user.getIdToken(); // get firebase token
+        const res = await axios.get(
+          "https://hackathon-portal-project.onrender.com/teams/leaderboard", // backend endpoint
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setLeaderboard(res.data); // save data
+      } catch (err) {
+        console.error("Error fetching leaderboard:", err);
+      } finally {
         setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchLeaderboard();
   }, []);
 
   if (loading) return <p>Loading leaderboard...</p>;
@@ -37,14 +43,14 @@ export default function LeaderboardPage() {
 
   return (
     <div className="leaderboard-container">
-      <h2>Leaderboard</h2>
+      <h2>leaderboard</h2>
       <div className="table-container">
         <table>
           <thead>
             <tr>
-              <th>Rank</th>
-              <th>Team Name</th>
-              <th>Score</th>
+              <th>rank</th>
+              <th>team name</th>
+              <th>score</th>
             </tr>
           </thead>
           <tbody>
