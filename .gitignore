@@ -27,7 +27,6 @@ node_modules/
 .env.production.local
 
 # Firebase / keys
-src/firebase/*.js
 .env*
 
 # Optional IDE files

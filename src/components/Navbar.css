@@ -30,6 +30,13 @@
   align-items: center;
 }
 
+.user-info {
+    color: white; 
+    font-size: 1em;
+    font-weight: 400;
+    padding: 8px 16px;
+}
+
 .nav-btn {
   color: #65c5e8;
   text-decoration: none;

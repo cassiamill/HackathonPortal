@@ -8,38 +8,32 @@
   src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: black;
-  padding: 10px 30px;
+/* 🚨 STICKY FOOTER FIX: Ensure the page container stretches */
+.home-container {
+    min-height: 100%; /* Make the content area fill the space provided by flex-grow: 1 */
+    width: 100%;
+    /* Use padding instead of margin to control internal spacing */
+    padding-bottom: 50px; /* Space before the footer starts */
 }
 
-.logo {
-  height: 50px;
+/* --- SECTION STYLES --- */
+
+section {
+    padding: 60px 20px;
+    margin: 0 auto;
+    background-color: #fcfcfc;
+    text-align: center;
 }
 
-.header-buttons .btn {
-  margin-left: 10px;
-  padding: 8px 16px;
-  text-decoration: none;
-  color: white;
-  border-radius: 4px;
-  font-weight: bold;
-}
+/* --- HERO SECTION --- */
 
-.login-btn {
-  background-color: #65c5e8;
-}
-
-.signup-btn {
-  background-color: #65c5e8;
-}
-
-.main-content {
-  text-align: center;
-  margin-top: 100px;
+.hero-section {
+    padding-top: 80px; /* Extra space below the navbar */
+    padding-bottom: 80px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    max-width: 1200px;
 }
 
 .main-title {
@@ -52,33 +46,278 @@
 
 .subtitle {
   font-size: 30px;
-  color: #65c5e8;
+  color: #333; /* Changed to dark color for contrast on white background */
   font-family: 'OpenSans', sans-serif;
-  font-weight: 100;
+  font-weight: 300;
   margin-top: 0px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .description {
-  font-size: 15px;
-  color: black;
+  font-size: 18px;
+  color: #555;
   font-family: 'OpenSans', sans-serif;
   font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto 40px auto;
+}
+
+.status-text {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #008000; /* Green for status */
+    font-weight: 600;
 }
 
 .cta-btn {
   display: inline-block;
-  margin-top: 20px;
   background-color: #65c5e8;
   color: white;
-  padding: 12px 24px;
+  padding: 14px 30px;
   text-decoration: none;
   font-weight: bold;
-  border-radius: 6px;
+  font-size: 18px;
+  border-radius: 8px;
   cursor: pointer;
   border: none;
+  transition: background-color 0.3s, transform 0.1s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cta-btn:hover {
   background-color: #4aa3c9;
+  transform: translateY(-2px);
+}
+
+
+/* --- GENERAL SECTION STYLES --- */
+
+.section-title {
+    font-family: 'BebasNeue', sans-serif;
+    font-size: 45px;
+    color: #1a1a1a;
+    border-bottom: 2px solid #65c5e8;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+    display: inline-block;
+}
+
+
+/* --- DETAILS SECTION --- */
+
+    .details-section {
+    background-color: #fcfcfc;
+}
+
+.details-grid {
+    /* ALTERADO: Muda a direção para coluna para empilhar itens */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; /* FORÇA O EMPILHAMENTO */
+    justify-content: space-around;
+    gap: 15px; /* Reduz o espaçamento entre itens empilhados */
+}
+
+.detail-item {
+    /* Centraliza o texto dentro de cada item */
+    text-align: center; 
+    min-width: 200px;
+    /* Faz o item ocupar a largura total do content-wrapper */
+    flex: 1; 
+    padding: 15px 0; /* Reduz o padding vertical */
+}
+
+.detail-label {
+    font-weight: 700;
+    color: #65c5e8;
+    display: block;
+    margin-bottom: 2px; /* Reduz o espaçamento entre rótulo e valor */
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.detail-value {
+    color: #1a1a1a;
+    font-size: 16px;
+}
+
+
+/* --- PRIZE SECTION --- */
+
+.prize-section{
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    max-width: 1200px;
+}
+
+
+.prize-list {
+    /* Changed to a responsive grid for side-by-side layout */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* At least 250px wide per card */
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.prize-item {
+    /* Styled as a clean card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px;
+    border: 1px solid #ddd; /* Light border for the card look */
+    border-radius: 6px;
+    text-align: center; /* Centering text inside the card */
+    height: 100%;
+}
+
+.prize-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+}
+
+.prize-rank {
+    /* Used as a centered icon/rank */
+    font-family: 'BebasNeue', sans-serif;
+    color: #65c5e8;
+    font-size: 48px; /* Bigger font for impact */
+    margin-right: 0;
+    margin-bottom: 10px;
+    min-width: unset;
+    text-align: center;
+}
+
+.prize-info {
+    text-align: center; /* Centering text inside prize-info block */
+    width: 100%;
+}
+
+.prize-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #1a1a1a;
+}
+.prize-value-text {
+    font-weight: 700;
+    color: #555;
+    font-size: 16px;
+}
+.prize-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+}
+
+
+
+/* --- SCHEDULE SECTION --- */
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px dashed #ddd;
+    font-size: 17px;
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+}
+
+.schedule-time {
+    font-weight: bold;
+    color: #65c5e8;
+    min-width: 100px;
+    text-align: left;
+}
+
+.schedule-event {
+    text-align: right;
+    color: #333;
+}
+
+.full-schedule-link {
+    display: inline-block;
+    color: #65c5e8;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.full-schedule-link:hover {
+    text-decoration: underline;
+}
+
+
+/* --- SPONSOR SECTION --- */
+
+.sponsor-section{
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    max-width: 1200px;
+}
+
+
+.sponsor-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.sponsor-logo-wrapper {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.sponsor-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+/* --- MEDIA QUERIES --- */
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 60px;
+    }
+
+    .subtitle {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 500px) {
+    .hero-section, .details-section, .prize-section, .schedule-section, .sponsor-section {
+        padding: 40px 10px;
+    }
+    
+    .main-title {
+        font-size: 45px;
+    }
+
+    .details-grid {
+        flex-direction: column;
+        gap: 15px;
+    }
 }

@@ -1,0 +1,132 @@
+.schedule-editor-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'OpenSans', sans-serif;
+}
+
+.editor-title {
+    font-family: 'BebasNeue', sans-serif;
+    color: #dc3545; /* Admin/Coordinator color */
+    font-size: 2.8em;
+    text-align: center;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
+}
+
+.editor-subtitle {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+
+.add-event-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: background-color 0.2s;
+}
+
+.add-event-button:hover {
+    background-color: #1e7e34;
+}
+
+/* Schedule Items */
+.schedule-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f9fd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 5px solid #ffc107;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.item-details {
+    display: flex;
+    flex-grow: 1;
+    gap: 15px;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.item-details input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'OpenSans', sans-serif;
+}
+
+.day-input { width: 80px; text-align: center; }
+.time-input { width: 100px; }
+.event-input { flex-grow: 1; }
+.location-input { width: 150px; }
+
+
+.remove-button {
+    padding: 8px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
+}
+
+/* Save Button */
+.save-schedule-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #4aa3c9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.save-schedule-button:hover {
+    background-color: #388ba3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .item-details {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .time-input, .day-input, .location-input {
+        width: 100%; /* Stack inputs on smaller screens */
+    }
+    .event-input {
+        width: 100%;
+    }
+    .schedule-item-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .remove-button {
+        margin-top: 10px;
+    }
+    .item-details {
+        margin-right: 0;
+    }
+}

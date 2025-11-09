@@ -1,0 +1,83 @@
+/* CertificatePage.css - Adhering to the established style guide */
+
+.certificate-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    font-family: 'OpenSans', sans-serif;
+}
+
+.certificate-title {
+    font-family: 'BebasNeue', sans-serif;
+    color: #65c5e8;
+    font-size: 40px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.certificate-subtitle {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.certificate-display {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+}
+
+.certificate-display p {
+    font-style: italic;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Download Button Styles (Main Action) */
+.download-button {
+    padding: 12px 25px;
+    margin-top: 15px;
+    border: none;
+    background-color: #65c5e8;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s;
+    font-size: 1em;
+}
+
+.download-button:hover {
+    background-color: #4aa3c9;
+}
+
+/* Access Denied State */
+.access-denied .error-message {
+    color: #dc3545;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.survey-link-button {
+    padding: 10px 20px;
+    background-color: #ffc107; /* Warning/Alert color */
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.survey-link-button:hover {
+    background-color: #e0a800;
+}

@@ -1,0 +1,49 @@
+/* Styling for the Footer to maintain the consistent design */
+.portal-footer {
+    /* Background color consistent with your current design (dark blue/black from your header image) */
+    background-color: #1a1a1a; 
+    color: #ffffff;
+    padding: 15px 20px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif; /* Use a clean font */
+    font-size: 14px;
+    /* Ensure it sticks to the bottom if needed, though usually at the end of content */
+    width: 100%; 
+    box-sizing: border-box; 
+    /* ❌ FIX: Removed margin-top: 50px; as the space is now handled by the flex-grow property in App.css */
+}
+
+.portal-footer p {
+    margin: 5px 0;
+}
+
+.footer-links {
+    margin-top: 5px;
+}
+
+.footer-links a {
+    color: #65c5e8; /* Your established button/link color */
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-links span {
+    color: #ffffff;
+}
+
+/* 📱 Mobile Responsiveness: Footer is already simple, but we ensure padding is good */
+@media (max-width: 600px) {
+    .portal-footer {
+        padding: 15px 10px;
+        font-size: 12px;
+    }
+    .footer-links a {
+        margin: 0 5px;
+    }
+}

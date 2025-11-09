@@ -1,0 +1,186 @@
+/* General Layout based on your theme */
+.dashboard-container.student-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'OpenSans', sans-serif;
+}
+
+.dashboard-title {
+    font-family: 'BebasNeue', sans-serif;
+    color: #65c5e8; /* Primary Blue */
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.dashboard-subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-family: 'OpenSans', sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #1a1a1a;
+    border-bottom: 2px solid #65c5e8; /* Blue accent */
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+}
+
+/* 1. Deadline Section */
+.deadline-section {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.deadline-card {
+    background-color: #f0f8ff; /* Very light blue background */
+    padding: 20px;
+    border: 1px solid #65c5e8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.deadline-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4aa3c9;
+    margin-bottom: 5px;
+}
+
+.deadline-time {
+    font-family: 'BebasNeue', sans-serif;
+    font-size: 2.5em;
+    color: #65c5e8;
+}
+
+.deadline-tip {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+/* 2. Team Overview Section */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.team-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.box-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.box-value {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #65c5e8;
+    margin-bottom: 10px;
+}
+
+.submission-status {
+    color: #dc3545; /* Temporary color for 'Pending' */
+}
+
+/* Small Action Buttons (consistent with your button style) */
+.btn-small {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.9em;
+}
+
+.action-link, .submit-link {
+    background-color: #65c5e8;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.action-link:hover, .submit-link:hover {
+    background-color: #4aa3c9;
+}
+
+.chat-link {
+    background-color: #28a745; /* Secondary action color (green) */
+    color: white;
+}
+.chat-link:hover {
+    background-color: #218838;
+}
+
+/* 3. Quick Links Section */
+.quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    background-color: #f5f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    transition: box-shadow 0.2s, background-color 0.2s;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.quick-link:hover {
+    background-color: #e6f7ff; /* Lighter blue on hover */
+    box-shadow: 0 4px 8px rgba(101, 197, 232, 0.3);
+}
+
+.link-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.link-text {
+    font-weight: 600;
+}
+
+.inline-link {
+    color: #65c5e8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .dashboard-container {
+        padding: 15px;
+        margin: 20px auto;
+    }
+    .dashboard-title {
+        font-size: 2.5em;
+    }
+    .team-grid, .quick-links-grid {
+        grid-template-columns: 1fr;
+    }
+}

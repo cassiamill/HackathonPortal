@@ -1,3 +1,4 @@
+/* Existing register-container styles remain unchanged */
 .register-container {
   padding: 30px;
   max-width: 400px;
@@ -17,14 +18,31 @@
   letter-spacing: 1px;
 }
 
-.register-container input {
+/* ➡️ CRITICAL CHANGE: Target both input and select elements */
+.register-container input,
+.register-container select { 
   padding: 8px;
-  width: 90%;
+  /* 90% width ensures elements align inside the 400px container */
+  width: 90%; 
   margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
+  /* Ensures the height and baseline match closely */
+  box-sizing: border-box; 
+  /* Sets font size/family for select to match other elements */
+  font-size: 16px; 
 }
 
+/* Additional style to ensure consistency for the select element text */
+.register-container select {
+    /* Simple fix for background on select if needed, though usually inherited */
+    background-color: white; 
+    /* Ensures the text color is the same as the input text color */
+    color: #333; 
+}
+
+
+/* Remaining button and message styles remain unchanged */
 .register-container button {
   padding: 10px 20px;
   margin-top: 15px;

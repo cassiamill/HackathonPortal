@@ -8,15 +8,34 @@
   src: url('./fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
 }
 
+/* 🚨 CRITICAL STICKY FOOTER FIX START */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    display: flex; /* Enable Flexbox on the main app container */
+    flex-direction: column; /* Stack items vertically (Navbar, Content, Footer) */
+    min-height: 100vh; /* Ensure it takes at least the full viewport height */
+    text-align: center; /* Keep your existing alignment */
+}
+
+/* This class, wrapped around your <Routes> in App.js, must grow to fill space */
+.main-content-wrapper { 
+    flex-grow: 1; /* This is the key: it consumes all available space, pushing the footer down */
+    width: 100%; /* Ensure it occupies full width */
+}
+/* 🚨 CRITICAL STICKY FOOTER FIX END */
+
 body {
   font-family: 'OpenSans', sans-serif;
   margin: 0;
   padding: 0;
 }
 
-.App {
-  text-align: center;
-}
+/* Removed the old .App block as it's merged above */
 
 .App-logo {
   height: 40vmin;

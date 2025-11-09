@@ -1,0 +1,105 @@
+.about-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'OpenSans', sans-serif;
+}
+
+.about-title {
+    font-family: 'BebasNeue', sans-serif;
+    color: #4aa3c9;
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
+}
+
+.about-subtitle {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-family: 'OpenSans', sans-serif;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #1a1a1a;
+    border-bottom: 2px solid #65c5e8;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.about-mission p, .about-theme p {
+    line-height: 1.6;
+    color: #495057;
+}
+
+/* Sponsors */
+.sponsors-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.sponsor-logo {
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sponsor-logo p {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.sponsor-logo .tier {
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+.gold {
+    border: 3px solid gold;
+    background-color: #fffde7;
+    color: #a87b00;
+}
+
+.silver {
+    border: 3px solid silver;
+    background-color: #f8f8f8;
+    color: #6c757d;
+}
+
+.bronze {
+    border: 3px solid #cd7f32;
+    background-color: #f7e6d9;
+    color: #8b4513;
+}
+
+.sponsor-note {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+    color: #6c757d;
+}
+
+@media (max-width: 600px) {
+    .about-container {
+        padding: 15px;
+    }
+    .about-title {
+        font-size: 2.2em;
+    }
+}
