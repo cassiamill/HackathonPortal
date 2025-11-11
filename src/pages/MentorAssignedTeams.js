@@ -3,14 +3,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../firebase/config";
 import "./MentorAssignedTeams.css";
 
-// Mentor check email (A simple mock for Mentor role check, replace with real role check)
-const MENTOR_EMAIL = "mentor@example.com"; 
 
-// Mock Data for a mentor's assigned teams
+const MENTOR_EMAIL = "maria@niagaracollegetoronto.com"; 
+
 const mockAssignedTeams = [
-    { teamId: "T001", teamName: "The Code Whisperers", lead: "Alex Johnson", project: "AI-Driven Eco-Route", status: "Active" },
-    { teamId: "T005", teamName: "The Debuggers", lead: "Maria Sanchez", project: "Smart Waste Management", status: "Active" },
-    { teamId: "T009", teamName: "Innovators Inc.", lead: "Sam Lee", project: "Campus Safety App", status: "Needs Help" },
+    { teamId: "T001", teamName: "The Coders", lead: "Alex J.", project: "AI-Driven Eco-Route", status: "Active" },
+    { teamId: "T005", teamName: "The Matters", lead: "Henry K.", project: "Smart Waste Management", status: "Active" },
+    { teamId: "T009", teamName: "Innovate+", lead: "Miguel M.", project: "Campus Safety App", status: "Needs Help" },
 ];
 
 export default function MentorAssignedTeams() {
@@ -21,15 +20,13 @@ export default function MentorAssignedTeams() {
 
     useEffect(() => {
         const user = auth.currentUser;
-        
-        // 🚨 ACCESS CONTROL: Must be a Mentor
+
         if (!user || user.email !== MENTOR_EMAIL) {
-            navigate("/mentorlogin"); // Redirect to a specialized login/dashboard
+            navigate("/mentorlogin"); 
             return;
         }
         setIsMentor(true);
         
-        // STUDENT TODO: Fetch mentor name and assigned teams from the backend (Req 2.0)
     }, [navigate]);
 
     if (!isMentor) {

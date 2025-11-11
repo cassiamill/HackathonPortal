@@ -3,12 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
 import "./JudgeTeamHistory.css";
 
-// Judge check email
-const JUDGE_EMAIL = "judge@example.com"; 
+const JUDGE_EMAIL = "hamilton_fuzinato@niagaracollegetoronto.com"; 
 
-// Mock Data for a team's history
 const mockTeamHistory = {
-    teamName: "The Code Whisperers (T001)",
+    teamName: "The Coders (T001)",
     submissions: [
         { 
             type: "Blueprint Submission", 
@@ -65,41 +63,38 @@ export default function JudgeTeamHistory() {
     useEffect(() => {
         const user = auth.currentUser;
         
-        // 🚨 ACCESS CONTROL: Must be a Judge
         if (!user || user.email !== JUDGE_EMAIL) {
             navigate("/judgelogin"); 
             return;
         }
         setIsJudge(true);
         
-        // STUDENT TODO: Fetch real submission history and past comments for this teamId
         setHistory(mockTeamHistory);
     }, [navigate, teamId]);
 
     if (!isJudge || !history) {
-        return <div className="judge-denied">Loading History or Access Denied...</div>;
+        return <div className="history-denied">Loading History or Access Denied...</div>;
     }
 
     return (
         <div className="history-container">
-            <h1 className="history-title">Submission History: {history.teamName}</h1>
-            <p className="history-subtitle">Access to all files and past feedback is crucial for informed decision-making (Req 3.0).</p>
+            <h1 className="history-title">{history.teamName}</h1>
+            <p className="history-subtitle">Access all files and past feedback for informed grading decisions.</p>
 
-            {/* 1. SUBMISSION HISTORY (Files) */}
-            <section className="section file-history-section">
-                <h3 className="section-title">📂 Project Submission Files</h3>
-                <table className="submission-history-table">
+            <section className="section submission-files">
+                <h2 className="section-title">Project Submission Files</h2>
+                <table className="history-table">
                     <thead>
                         <tr>
                             <th>Submission Type</th>
                             <th>File Name</th>
                             <th>Date Uploaded</th>
-                            <th>Download Link</th>
+                            <th>Download</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {history.submissions.map((sub, index) => (
-                            <tr key={index}>
+                        {history.submissions.map((sub, idx) => (
+                            <tr key={idx}>
                                 <td>{sub.type}</td>
                                 <td>{sub.fileName}</td>
                                 <td>{sub.date}</td>
@@ -114,32 +109,29 @@ export default function JudgeTeamHistory() {
                 </table>
             </section>
 
-            {/* 2. GRADING COMMENTS & FEEDBACK (Page 15) */}
-            <section className="section comments-section">
-                <h3 className="section-title">💬 All Judge Feedback Received</h3>
+            <section className="section feedback-section">
+                <h2 className="section-title">Judge Feedback</h2>
                 
                 {history.comments.length > 0 ? (
-                    history.comments.map((comment, index) => (
-                        <div key={index} className="comment-card">
-                            <div className="comment-header">
-                                <span className="judge-name">Judge: **{comment.judge}**</span>
-                                <span className="score-date">Score: **{comment.score}** | Date: {comment.date}</span>
+                    history.comments.map((comment, idx) => (
+                        <div key={idx} className="feedback-card">
+                            <div className="feedback-header">
+                                <span className="judge-name">{comment.judge}</span>
+                                <span className="score-date">{comment.score} | {comment.date}</span>
                             </div>
-                            
-                            <p className="overall-comment-text">**Overall Comment:** {comment.overallComment}</p>
-                            
-                            <div className="rubric-summary">
-                                <strong>Rubric Snippet:</strong>
+                            <p className="overall-comment"><strong>Overall Comment:</strong> {comment.overallComment}</p>
+                            <div className="rubric-breakdown">
+                                <strong>Rubric Breakdown:</strong>
                                 <ul>
                                     {comment.rubricBreakdown.map((item, i) => (
-                                        <li key={i}>{item.criterion}: {item.score} points</li>
+                                        <li key={i}>{item.criterion}: {item.score} pts</li>
                                     ))}
                                 </ul>
                             </div>
                         </div>
                     ))
                 ) : (
-                    <p className="no-comments">No grading comments have been submitted for this team yet.</p>
+                    <p className="no-feedback">No comments submitted yet for this team.</p>
                 )}
             </section>
         </div>

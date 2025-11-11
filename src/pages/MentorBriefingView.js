@@ -5,7 +5,6 @@ import "./MentorBriefingView.css";
 
 const MENTOR_EMAIL = "mentor@example.com"; 
 
-// Mock Data for Briefing Materials
 const mockBriefingMaterials = [
     { title: "Official Hackathon Challenge Document", description: "The core problem statement and scope.", link: "/files/challenge.pdf", date: "Nov 23, 2025" },
     { title: "Judging Rubric Summary", description: "High-level overview of scoring criteria.", link: "/files/rubric.pdf", date: "Nov 24, 2025" },
@@ -20,14 +19,12 @@ export default function MentorBriefingView() {
     useEffect(() => {
         const user = auth.currentUser;
         
-        // 🚨 ACCESS CONTROL: Must be a Mentor
         if (!user || user.email !== MENTOR_EMAIL) {
             navigate("/mentorlogin"); 
             return;
         }
         setIsMentor(true);
         
-        // STUDENT TODO: Fetch list of briefing materials from the backend
     }, [navigate]);
 
     if (!isMentor) {

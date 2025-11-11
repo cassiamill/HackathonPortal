@@ -1,30 +1,26 @@
-/* JudgeRubricEditor.css - Adhering to the established style guide */
-
 .rubric-editor-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 30px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-    font-family: 'OpenSans', sans-serif;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Open Sans', sans-serif;
 }
 
 .editor-title {
     font-family: 'BebasNeue', sans-serif;
-    color: #65c5e8;
-    font-size: 40px;
-    margin-bottom: 5px;
-    letter-spacing: 1px;
+    color: #4aa3c9;
+    font-size: 2.5em;
     text-align: center;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
 }
 
 .editor-subtitle {
     text-align: center;
-    color: #666;
+    color: #6c757d;
     margin-bottom: 30px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
 }
 
 .rubric-form {
@@ -40,32 +36,31 @@
 }
 
 .editor-input {
-    padding: 8px;
+    padding: 10px;
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    font-family: 'OpenSans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .criteria-header {
     font-family: 'BebasNeue', sans-serif;
+    font-size: 1.5em;
     color: #333;
-    font-size: 24px;
     margin-top: 10px;
     border-top: 1px solid #eee;
     padding-top: 20px;
 }
 
-/* Criterion Row Layout */
 .criterion-row {
     display: flex;
     gap: 15px;
-    align-items: flex-end; /* Align inputs to the bottom line */
-    padding: 10px;
-    border: 1px solid #f0f0f0;
-    border-radius: 4px;
-    background-color: #f9f9f9;
+    align-items: flex-end;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #f0f8ff;
 }
 
 .criterion-group {
@@ -73,49 +68,48 @@
 }
 
 .name-input {
-    flex: 3; /* Name takes more space */
+    flex: 3;
 }
 
 .weight-input {
-    flex: 1; /* Weight is smaller */
+    flex: 1;
     max-width: 100px;
 }
 
 .remove-button {
     padding: 8px 15px;
     border: none;
-    background-color: #dc3545; /* Red for destructive action */
+    background-color: #dc3545;
     color: white;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s;
-    height: 36px; /* Match input height for visual alignment */
+    height: 38px;
 }
 
 .remove-button:hover {
     background-color: #c82333;
 }
 
-/* Action Buttons */
 .action-buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 25px;
     gap: 20px;
 }
 
 .add-button {
-    padding: 10px 20px;
-    background-color: #28a745; /* Green for add */
+    flex: 1;
+    padding: 12px 20px;
+    background-color: #28a745;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s;
-    flex: 1;
 }
 
 .add-button:hover {
@@ -123,20 +117,20 @@
 }
 
 .save-button {
-    padding: 10px 20px;
-    background-color: #65c5e8;
+    flex: 1;
+    padding: 12px 20px;
+    background-color: #28a3e8;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s;
-    flex: 1;
 }
 
 .save-button:hover:not(:disabled) {
-    background-color: #4aa3c9;
+    background-color: #1e7eb3;
 }
 
 .save-button:disabled {
@@ -147,7 +141,24 @@
 
 .weight-warning {
     color: #dc3545;
-    text-align: center;
     font-weight: bold;
+    text-align: center;
     margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .rubric-editor-container {
+        padding: 20px;
+    }
+    .editor-title {
+        font-size: 2em;
+    }
+    .criterion-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

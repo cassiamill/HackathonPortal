@@ -1,69 +1,70 @@
-/* Container and Header */
 .history-container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 40px auto;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     font-family: 'OpenSans', sans-serif;
 }
 
 .history-title {
     font-family: 'BebasNeue', sans-serif;
-    color: #4aa3c9;
-    font-size: 2.5em;
+    font-size: 3em;
+    color: #65c5e8;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     letter-spacing: 1.5px;
 }
 
 .history-subtitle {
     text-align: center;
-    color: #6c757d;
-    margin-bottom: 30px;
+    color: #495057;
+    margin-bottom: 40px;
+    font-size: 16px;
 }
 
-.section-title {
-    font-family: 'OpenSans', sans-serif;
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #1a1a1a;
-    border-bottom: 2px solid #65c5e8;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-}
-
-/* 1. Submission History Table */
-.submission-history-table {
-    width: 100%;
-    border-collapse: collapse;
+.section {
     margin-bottom: 40px;
 }
 
-.submission-history-table th, .submission-history-table td {
-    padding: 12px;
-    text-align: left;
+.section-title {
+    font-family: 'BebasNeue', sans-serif;
+    font-size: 1.8em;
+    color: #4aa3c9;
+    margin-bottom: 15px;
+}
+
+.submission-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.submission-history-table th,
+.submission-history-table td {
+    padding: 12px 15px;
     border-bottom: 1px solid #e0e0e0;
+    text-align: left;
 }
 
 .submission-history-table th {
     background-color: #f0f8ff;
-    color: #4aa3c9;
+    color: #65c5e8;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.9em;
 }
 
 .submission-history-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
 }
 
 .download-link {
-    color: #28a745; /* Green download link */
+    color: #28a745;
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.1s;
+    transition: color 0.2s;
 }
 
 .download-link:hover {
@@ -71,82 +72,71 @@
     text-decoration: underline;
 }
 
-/* 2. Comments/Feedback Section */
 .comment-card {
-    background-color: #f7f9fd;
-    padding: 18px;
-    border-radius: 8px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
     margin-bottom: 20px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .comment-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
     margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 0.95em;
 }
 
 .judge-name {
-    color: #65c5e8;
-    font-size: 1.1em;
-}
-
-.score-date {
-    font-size: 0.9em;
-    color: #6c757d;
-}
-
-.overall-comment-text {
-    margin: 10px 0;
-    line-height: 1.5;
-}
-
-.rubric-summary {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #ffffff;
-    border-radius: 4px;
-    border: 1px dashed #ced4da;
-}
-
-.rubric-summary ul {
-    list-style: disc;
-    padding-left: 20px;
-    margin: 5px 0 0 0;
-    font-size: 0.95em;
     color: #495057;
 }
 
-.no-comments {
-    font-style: italic;
-    color: #dc3545;
-    text-align: center;
-    padding: 20px;
-    border: 1px dashed #dc3545;
-    border-radius: 4px;
+.score-date {
+    color: #333;
 }
 
-/* Mobile Responsiveness */
+.overall-comment-text {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.rubric-summary ul {
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.rubric-summary li {
+    margin-bottom: 4px;
+}
+
+.no-comments {
+    font-size: 16px;
+    color: #6c757d;
+    font-style: italic;
+}
+
 @media (max-width: 768px) {
     .history-container {
-        padding: 15px;
+        padding: 20px;
     }
+
     .history-title {
-        font-size: 2em;
+        font-size: 2.2em;
     }
-    .comment-header {
-        flex-direction: column;
-        align-items: flex-start;
+
+    .section-title {
+        font-size: 1.4em;
     }
-    .score-date {
-        margin-top: 5px;
-    }
-    .submission-history-table th, .submission-history-table td {
-        padding: 8px 5px;
+
+    .submission-history-table th,
+    .submission-history-table td {
+        padding: 8px 10px;
         font-size: 0.85em;
+    }
+
+    .comment-card {
+        padding: 15px;
     }
 }

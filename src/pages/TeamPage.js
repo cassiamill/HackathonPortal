@@ -3,21 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
 import "./TeamPage.css";
 
-// Mock data to simulate fetching the team's private workspace content
 const mockWorkspaceData = {
-    teamName: "The Code Whisperers",
+    teamName: "The Coders",
     tasks: [
-        { id: 1, name: "Finalize AI Model Training Data", assignedTo: "Alex", status: "In Progress" },
-        { id: 2, name: "Design Presentation Slides", assignedTo: "Maria", status: "To Do" },
-        { id: 3, name: "Integrate Firebase Authentication", assignedTo: "Sam", status: "Completed" },
+        { id: 1, name: "Finalize AI Model Training Data", assignedTo: "Cassia", status: "In Progress" },
+        { id: 2, name: "Design Presentation Slides", assignedTo: "Anish", status: "To Do" },
+        { id: 3, name: "Integrate Firebase Authentication", assignedTo: "Lucas", status: "Completed" },
     ],
     notes: [
-        { id: 1, content: "Remember to use the Cloudinary URL from the submission page for the final project demo link.", author: "Alex (Leader)" },
-        { id: 2, content: "Check the API limit for the weather data service.", author: "Sam" },
+        { id: 1, content: "Remember to use the Cloudinary for submissions!", author: "Cassia (Leader)" },
+        { id: 2, content: "Check report.", author: "Lucas" },
     ],
     resourceLinks: [
         { name: "Official Hackathon GitHub Repo", url: "https://github.com/gus-hack-2025/team-7" },
-        { name: "MongoDB Atlas Connection String (Private)", url: "mongodb://[REDACTED]" },
+        { name: "MongoDB Atlas website", url: "mongodb.com" },
     ],
 };
 
@@ -28,78 +27,78 @@ export default function TeamWorkspacePage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // STUDENT TODO: Check login and fetch actual team workspace data from backend
         const user = auth.currentUser;
         if (!user) {
             navigate("/login");
             return;
         }
-        // In the real app, fetch data based on user's teamId
         setWorkspace(mockWorkspaceData);
     }, [navigate]);
 
+    const handleChange = (setter) => (e) => setter(e.target.value);
+
     const handleAddTask = (e) => {
         e.preventDefault();
-        if (!newTask.trim()) return;
+        const trimmedTask = newTask.trim();
+        if (!trimmedTask) return;
 
-        // 📌 FRONTEND MOCK LOGIC for Task Addition
+        if (workspace.tasks.some(t => t.name === trimmedTask)) {
+            alert("Task already exists!");
+            return;
+        }
+
         const task = {
             id: workspace.tasks.length + 1,
-            name: newTask.trim(),
-            assignedTo: "Me", // Simple assignment mock
+            name: trimmedTask,
+            assignedTo: "Me",
             status: "To Do",
         };
-        // STUDENT TODO: Send task creation request to Node.js backend
         setWorkspace(prev => ({ ...prev, tasks: [...prev.tasks, task] }));
         setNewTask("");
     };
 
     const handleAddNote = (e) => {
         e.preventDefault();
-        if (!newNote.trim()) return;
+        const trimmedNote = newNote.trim();
+        if (!trimmedNote) return;
 
-        // 📌 FRONTEND MOCK LOGIC for Note Addition
         const note = {
             id: workspace.notes.length + 1,
-            content: newNote.trim(),
-            author: "You", // Simple author mock
+            content: trimmedNote,
+            author: "You",
         };
-        // STUDENT TODO: Send note creation request to Node.js backend
-        setWorkspace(prev => ({ ...prev, notes: [note, ...prev.notes] })); // Newest on top
+        setWorkspace(prev => ({ ...prev, notes: [note, ...prev.notes] }));
         setNewNote("");
     };
-    
-    // Function to visually toggle task status (mocking backend interaction)
+
     const toggleTaskStatus = (taskId) => {
         setWorkspace(prev => ({
             ...prev,
-            tasks: prev.tasks.map(task => 
-                task.id === taskId 
-                    ? { ...task, status: task.status === 'Completed' ? 'To Do' : 'Completed' } 
+            tasks: prev.tasks.map(task =>
+                task.id === taskId
+                    ? { ...task, status: task.status === 'Completed' ? 'To Do' : 'Completed' }
                     : task
             )
         }));
     };
 
-    if (!workspace) {
-        return <div className="loading-container">Loading Private Workspace...</div>;
-    }
+    if (!workspace) return <div className="loading-container">Loading Private Workspace...</div>;
 
     return (
         <div className="workspace-container">
             <h1 className="workspace-title">{workspace.teamName} - Private Workspace</h1>
             <p className="workspace-subtitle">Your team's internal collaboration hub.</p>
 
-            {/* 1. TO-DO LIST / TASK MANAGEMENT */}
             <section className="section task-section">
-                <h3 className="section-title">🚀 Team To-Do List</h3>
+                <h3 className="section-title">Tasks List</h3>
                 <form onSubmit={handleAddTask} className="task-form">
                     <input
                         type="text"
                         placeholder="Add a new task (e.g., Build Frontend Dashboard)"
                         value={newTask}
-                        onChange={(e) => setNewTask(e.target.value)}
+                        onChange={handleChange(setNewTask)}
                         className="task-input"
+                        required
                     />
                     <button type="submit" className="task-button">Add Task</button>
                 </form>
@@ -119,20 +118,20 @@ export default function TeamWorkspacePage() {
                 </div>
             </section>
 
-            {/* 2. SHARED NOTES & RESOURCES */}
             <section className="section notes-section">
-                <h3 className="section-title">📝 Quick Notes & Ideas</h3>
+                <h3 className="section-title">Notes</h3>
                 <form onSubmit={handleAddNote} className="note-form">
                     <textarea
                         placeholder="Share a quick note or idea..."
                         value={newNote}
-                        onChange={(e) => setNewNote(e.target.value)}
+                        onChange={handleChange(setNewNote)}
                         rows="3"
                         className="note-textarea"
+                        required
                     ></textarea>
                     <button type="submit" className="task-button">Add Note</button>
                 </form>
-                
+
                 <div className="notes-list">
                     {workspace.notes.map(note => (
                         <div key={note.id} className="note-item">
@@ -142,9 +141,9 @@ export default function TeamWorkspacePage() {
                     ))}
                 </div>
             </section>
-            
+
             <section className="section links-section">
-                <h3 className="section-title">🔗 Critical Resources</h3>
+                <h3 className="section-title">Resources and References</h3>
                 <ul className="links-list">
                     {workspace.resourceLinks.map((link, index) => (
                         <li key={index}>

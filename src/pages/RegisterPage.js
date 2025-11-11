@@ -21,8 +21,8 @@ export default function RegisterPage() {
 
   const gusColleges = [
     "Niagara College - Toronto (NCT)",
-    "College B",
-    "College C"
+    "Niagara College - Niagara Falls",
+    "Toronto School of Management"
   ];
 
   const handleRegister = async (e) => {
@@ -40,20 +40,15 @@ export default function RegisterPage() {
     }
 
     try {
-      // 1️⃣ Create Firebase User
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // 2️⃣ Update Display Name
       await updateProfile(user, { displayName: name });
 
-      // 3️⃣ Send Verification Email
       await sendEmailVerification(user);
 
-      // 4️⃣ Log out the user immediately (so they can't log in before verification)
       await signOut(auth);
 
-      // 5️⃣ Navigate to the Verify Email Page, passing the email
       navigate("/verify-email", {
         state: {
           email: email,

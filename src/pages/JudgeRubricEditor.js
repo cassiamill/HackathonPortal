@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config"; 
 import "./JudgeRubricEditor.css";
 
-// Mock Data for a standard rubric criterion
 const newCriterionTemplate = { id: Date.now(), name: "", weight: 10 };
-const COORDINATOR_EMAIL = "coordinator@example.com"; // Coordinator access control
+const COORDINATOR_EMAIL = "coordinator@example.com";
 
 export default function JudgeRubricEditor() {
     const navigate = useNavigate();
@@ -19,14 +18,11 @@ export default function JudgeRubricEditor() {
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
-    // Access Control Check (Req 3.0: customizable by administrators)
     useEffect(() => {
         const user = auth.currentUser;
-        // Simplified check: only allows a specific email for mock purposes
         if (user && user.email === COORDINATOR_EMAIL) {
             setIsCoordinator(true);
         } else {
-            // Redirect or deny access if not a Coordinator
             navigate("/login"); 
         }
     }, [navigate]);
@@ -45,9 +41,7 @@ export default function JudgeRubricEditor() {
         ));
     };
 
-    const calculateTotalWeight = () => {
-        return criteria.reduce((sum, c) => sum + (c.weight || 0), 0);
-    };
+    const calculateTotalWeight = () => criteria.reduce((sum, c) => sum + (c.weight || 0), 0);
 
     const handleSaveRubric = async (e) => {
         e.preventDefault();
@@ -64,9 +58,8 @@ export default function JudgeRubricEditor() {
         }
 
         setIsLoading(true);
-        // TODO: Send rubricTitle and criteria to the backend API for storage
         console.log("Saving Rubric:", { rubricTitle, criteria });
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
         setIsLoading(false);
 
         setMessage("Success: Rubric saved and ready for judge use!");
@@ -81,7 +74,7 @@ export default function JudgeRubricEditor() {
     return (
         <div className="rubric-editor-container">
             <h2 className="editor-title">Custom Rubric Editor</h2>
-            <p className="editor-subtitle">Administrators customize the grading criteria here (Req 3.0).</p>
+            <p className="editor-subtitle">Administrators customize the grading criteria here.</p>
 
             {message && <p className={`editor-message ${message.startsWith('Error') ? 'error-message' : 'success-message'}`}>{message}</p>}
 

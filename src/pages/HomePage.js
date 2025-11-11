@@ -3,72 +3,54 @@ import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../firebase/config";
 import "./HomePage.css";
 
-// Mock data for the landing page sections
 const mockData = {
   details: {
-    theme: "Sustainable Urban Futures",
-    date: "November 23-24, 2025",
-    location: "Niagara College Toronto Campus (Virtual Track Available)",
-    duration: "24 Hours (Starting 10:00 AM EST)",
+    theme: "Sustainable Urban Tech",
+    date: "Nov 23-24, 2025",
+    location: "Niagara College Toronto - Mirvish Campus",
   },
   prizes: [
-    { title: "Grand Prize", value: "$5,000 Cash + Tech Bundle", description: "Best overall project implementation and presentation." },
-    { title: "Runner Up", value: "$2,000 Cash", description: "Second place prize for innovation and completeness." },
-    { title: "Sustainability Award", value: "$500 Gift Card", description: "Best project addressing an environmental challenge." },
+    { title: "1st Place", value: "$2,000", description: "Best overall project." },
+    { title: "2nd Place", value: "$1,000", description: "2nd Best overall project." },
+    { title: "3rd Place", value: "$500", description: "3rd Best overall project." },
   ],
   schedule: [
-    { time: "10:00 AM", event: "Opening Ceremony & Keynote" },
-    { time: "11:00 AM", event: "Hacking Begins & Team Check-in" },
-    { time: "05:00 PM", event: "Mentor Office Hours (Virtual)" },
-    { time: "11:00 AM (Day 2)", event: "Project Submissions Deadline" },
-    { time: "12:00 PM", event: "Live Judging Sessions" },
-    { time: "03:00 PM", event: "Closing Ceremony & Awards" },
+    { time: "10 AM", event: "Opening & Kickoff" },
+    { time: "11 AM", event: "Start Hacking!" },
+    { time: "5 PM", event: "Mentor Office Hours" },
+    { time: "Day 2, 11 AM", event: "Project Deadline" },
+    { time: "Day 2, 12 PM", event: "Judging Time" },
+    { time: "3 PM", event: "Closing & Awards" },
   ],
-  sponsors: [
-    { name: "Google Cloud", logo: "https://placehold.co/150x40/f0f0f0/333333?text=Google+Cloud" },
-    { name: "AWS", logo: "https://placehold.co/150x40/f0f0f0/333333?text=AWS" },
-    { name: "TD Bank", logo: "https://placehold.co/150x40/f0f0f0/333333?text=TD+Bank" },
-    { name: "CIBC", logo: "https://placehold.co/150x40/f0f0f0/333333?text=CIBC" },
-  ]
+  sponsors: [ "Google", "TD Bank", "CIBC"]
 };
-
 
 export default function HomePage() {
   const navigate = useNavigate();
 
-  // Handle "Join Hackathon" click - logic is simplified for now
   const handleJoinHackathon = () => {
     const user = auth.currentUser;
-
-    // If not logged in, navigate to login page
     if (!user) {
       navigate("/login");
       return;
     }
-    
-    // Default to the team creation flow if the user is logged in
-    navigate("/team-selection");
+    navigate("/student/team-select");
   };
 
   return (
     <div className="home-container">
-      
-      {/* 1. HERO SECTION */}
       <section className="section hero-section">
-        <h1 className="main-title">GUS HACKATHON PORTAL</h1>
-        <h2 className="subtitle">The Home for Innovation.</h2>
+        <h1 className="main-title">GUS Hackathon Portal</h1>
+        <h2 className="subtitle">The Home for Innovation</h2>
         <p className="description">
-          Where students collaborate on projects, showcase their skills, and win amazing prizes!
+          Team up, build cool stuff, and win some awesome prizes!
         </p>
         <button className="cta-btn" onClick={handleJoinHackathon}>
-          Join the Hackathon
+          Join Now
         </button>
-        <p className="status-text">Registration is now open!</p>
       </section>
-
-      {/* 2. EVENT DETAILS SECTION */}
       <section className="section details-section">
-        <h3 className="section-title">Event Details</h3>
+        <h3 className="section-title">Event Info</h3>
         <div className="details-grid">
           <div className="detail-item">
             <span className="detail-label">Theme:</span>
@@ -79,31 +61,27 @@ export default function HomePage() {
             <span className="detail-value">{mockData.details.date}</span>
           </div>
           <div className="detail-item">
-            <span className="detail-label">Location:</span>
+            <span className="detail-label">Where:</span>
             <span className="detail-value">{mockData.details.location}</span>
           </div>
         </div>
       </section>
-      
-      {/* 3. PRIZE SECTION */}
       <section className="section prize-section">
-        <h3 className="section-title">Prizes & Awards</h3>
+        <h3 className="section-title">Prizes</h3>
         <div className="prize-list">
           {mockData.prizes.map((p, index) => (
             <div key={index} className="prize-item">
               <span className="prize-rank">#{index + 1}</span>
               <div className="prize-info">
-                <h4>{p.title} - <span className="prize-value-text">{p.value}</span></h4>
+                <h4>{p.title} - {p.value}</h4>
                 <p>{p.description}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
-
-      {/* 4. SCHEDULE SNEAK PEEK */}
       <section className="section schedule-section">
-        <h3 className="section-title">Schedule Highlights</h3>
+        <h3 className="section-title">Schedule</h3>
         <div className="schedule-list">
           {mockData.schedule.map((item, index) => (
             <div key={index} className="schedule-item">
@@ -112,17 +90,16 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-        <Link to="/full-schedule" className="full-schedule-link">View Full Schedule &rarr;</Link>
+        <Link to="/schedule" className="full-schedule-link">
+          See Full Schedule &rarr;
+        </Link>
       </section>
-
-      {/* 5. SPONSORS SECTION */}
       <section className="section sponsor-section">
-        <h3 className="section-title">Our Proud Sponsors</h3>
+        <h3 className="section-title">Sponsors</h3>
         <div className="sponsor-logos">
-          {mockData.sponsors.map((s, index) => (
+          {mockData.sponsors.map((name, index) => (
             <div key={index} className="sponsor-logo-wrapper">
-              {/* Using a simple placeholder text to match the minimalist theme */}
-              <p className="sponsor-text">{s.name}</p>
+              <p className="sponsor-text">{name}</p>
             </div>
           ))}
         </div>

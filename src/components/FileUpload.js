@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
-import FileUpload from "../components/FileUpload"; // <-- CORRECTED IMPORT
+import FileUpload from "../components/FileUpload";
 import "./FileUpload.css";
 
-// Mock data to simulate fetching submission history
 const mockSubmissionHistory = [
     { type: "Blueprint Submission (Day 1)", date: "Nov 23, 2025", status: "Successful", fileName: "Team7_Blueprint_V1.pdf" },
-    { type: "Final Project Code (Day 4)", date: "Pending", status: "Awaiting Upload", fileName: "N/A" },
-    { type: "Final Presentation Slides (Day 4)", date: "Pending", status: "Awaiting Upload", fileName: "N/A" },
+    { type: "Final Project Code (Day 2)", date: "Pending", status: "Awaiting Upload", fileName: "N/A" },
+    { type: "Final Presentation Slides (Day 2)", date: "Pending", status: "Awaiting Upload", fileName: "N/A" },
 ];
 
-// Mock Team/User IDs (In a real app, these would come from state/backend)
 const MOCK_TEAM_ID = "T007_CWHISPERERS";
 const MOCK_USER_ID = "FIREBASE_UID_12345";
 
-// SubmissionPage component
 export default function SubmissionPage() {
     const [history, setHistory] = useState(mockSubmissionHistory);
     const [submissionType, setSubmissionType] = useState("Blueprint");
@@ -30,38 +27,20 @@ export default function SubmissionPage() {
             navigate("/login");
             return;
         }
-        // Use actual Firebase UID
-        setUserId(user.uid); 
-
-        // STUDENT TODO: Fetch real team ID from MongoDB based on user.uid
-        // For now, MOCK_TEAM_ID is used.
+        setUserId(user.uid);
     }, [navigate]);
 
-    // 📌 Handle the successful file upload from the FileUpload component
-    const handleSubmissionSuccess = (fileName, fileUrl) => {
-        setMessage(`Success! Your ${submissionType} (${fileName}) was successfully uploaded.`);
-        
-        // STUDENT TODO: This is where you call your backend to record the fileUrl, 
-        // submissionType, teamId, and userId in your MongoDB collection.
-        
-        // Mocking the update of history state for frontend display:
-        setHistory(prevHistory => {
-            // Find existing mock item and update it, or add a new one if dynamic
-            const existingIndex = prevHistory.findIndex(item => item.type.includes(submissionType) && item.status.includes('Pending'));
-            if (existingIndex > -1) {
-                const newHistory = [...prevHistory];
-                newHistory[existingIndex] = { 
-                    ...newHistory[existingIndex], 
-                    date: new Date().toLocaleDateString(), 
-                    status: "Successful", 
-                    fileName: fileName 
-                };
-                return newHistory;
+    const handleSubmissionSuccess = (fileName) => {
+        setMessage(`Success! Your ${submissionType} (${fileName}) was uploaded.`);
+        setHistory(prev => {
+            const index = prev.findIndex(item => item.type.includes(submissionType) && item.status.includes("Pending"));
+            if (index > -1) {
+                const updated = [...prev];
+                updated[index] = { ...updated[index], date: new Date().toLocaleDateString(), status: "Successful", fileName };
+                return updated;
             }
-            return prevHistory;
+            return prev;
         });
-
-        // Reset message after a few seconds
         setTimeout(() => setMessage(""), 5000);
     };
 
@@ -72,7 +51,6 @@ export default function SubmissionPage() {
 
             {message && <p className="status-message success-message">{message}</p>}
 
-            {/* 1. UPLOAD SECTION */}
             <section className="section upload-section">
                 <h3 className="section-title">New Submission</h3>
                 <div className="form-group">
@@ -84,24 +62,21 @@ export default function SubmissionPage() {
                         className="select-input"
                     >
                         <option value="Blueprint">Blueprint (Day 1)</option>
-                        <option value="Final Project Code">Final Project Code (Day 4)</option>
-                        <option value="Final Presentation Slides">Final Presentation Slides (Day 4)</option>
+                        <option value="Final Project Code">Final Project Code (Day 2)</option>
+                        <option value="Final Presentation Slides">Final Presentation Slides (Day 2)</option>
                     </select>
                 </div>
-                
                 <p className="upload-note">
-                    **Note:** File types allowed: PDF, DOCX, PPTX, or ZIP (for code). Max size: 50MB.
+                    File types allowed: PDF, DOCX, PPTX, or ZIP. Max size: 50MB.
                 </p>
-                {/* 📌 CORRECT INTEGRATION WITH YOUR FileUpload.js */}
                 <FileUpload 
-                    teamId={teamId} // Pass required prop
-                    userId={userId} // Pass required prop
-                    submissionType={submissionType} // Pass for backend logging
-                    onSuccess={handleSubmissionSuccess} // Use the callback
+                    teamId={teamId}
+                    userId={userId}
+                    submissionType={submissionType}
+                    onSuccess={handleSubmissionSuccess}
                 />
             </section>
 
-            {/* 2. SUBMISSION HISTORY (Req 3.0) */}
             <section className="section history-section">
                 <h3 className="section-title">Submission History</h3>
                 <table className="history-table">
@@ -119,7 +94,7 @@ export default function SubmissionPage() {
                                 <td>{item.type}</td>
                                 <td>{item.fileName}</td>
                                 <td>{item.date}</td>
-                                <td data-label="Status" className={`status-${item.status.toLowerCase().replace(' ', '-')}`}>
+                                <td className={`status-${item.status.toLowerCase().replace(' ', '-')}`}>
                                     {item.status}
                                 </td>
                             </tr>

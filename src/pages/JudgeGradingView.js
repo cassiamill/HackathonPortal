@@ -3,10 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
 import "./JudgeGradingView.css";
 
-// Judge check email
-const JUDGE_EMAIL = "judge@example.com"; 
+const JUDGE_EMAIL = "hamilton_fuzinato@niagaracollegetoronto.com"; 
 
-// Mock Rubric Data (customizable by admins - Req 3.0)
 const mockRubric = [
     { id: 1, criterion: "Innovation & Creativity", maxScore: 30, score: 0, comment: "" },
     { id: 2, criterion: "Technical Execution & Polish", maxScore: 30, score: 0, comment: "" },
@@ -15,7 +13,7 @@ const mockRubric = [
 ];
 
 export default function JudgeGradingView() {
-    const { teamId } = useParams(); // Get teamId from URL (e.g., /judge/grade/T001)
+    const { teamId } = useParams();
     const [teamName, setTeamName] = useState("");
     const [rubricScores, setRubricScores] = useState(mockRubric);
     const [judgeComment, setJudgeComment] = useState("");
@@ -25,52 +23,31 @@ export default function JudgeGradingView() {
     useEffect(() => {
         const user = auth.currentUser;
         if (!user || user.email !== JUDGE_EMAIL) {
-            navigate("/judgelogin"); 
+            navigate("/judgelogin");
             return;
         }
         setIsJudge(true);
-        
-        // STUDENT TODO: Fetch team name and current/previous scores/comments for this judge/team
         setTeamName(`Team ${teamId}`);
     }, [navigate, teamId]);
     
-    // Calculate the running total score
     const totalScore = rubricScores.reduce((sum, item) => sum + parseInt(item.score || 0), 0);
     const maxTotalScore = rubricScores.reduce((sum, item) => sum + item.maxScore, 0);
 
     const handleScoreChange = (id, value) => {
         const score = Math.max(0, Math.min(value, rubricScores.find(r => r.id === id).maxScore));
-        
-        setRubricScores(prev => prev.map(item => 
-            item.id === id ? { ...item, score: score } : item
-        ));
+        setRubricScores(prev => prev.map(item => item.id === id ? { ...item, score } : item));
     };
 
     const handleCommentChange = (id, comment) => {
-        setRubricScores(prev => prev.map(item => 
-            item.id === id ? { ...item, comment: comment } : item
-        ));
+        setRubricScores(prev => prev.map(item => item.id === id ? { ...item, comment } : item));
     };
 
     const handleSubmitGrade = (e) => {
         e.preventDefault();
-        
-        if (totalScore === 0) {
-            return alert("Please enter scores before submitting.");
-        }
-
-        // 🚨 LIVE GRADING SYSTEM (Req 3.0)
-        // STUDENT TODO: Send the rubricScores, judgeComment, and teamId to the backend
-        // The backend will automatically recalculate the team's ranking.
-        
-        console.log(`Submitting grades for ${teamName}:`, { 
-            totalScore: totalScore, 
-            rubric: rubricScores, 
-            overallComment: judgeComment 
-        });
-
+        if (totalScore === 0) return alert("Please enter scores before submitting.");
+        console.log(`Submitting grades for ${teamName}:`, { totalScore, rubric: rubricScores, overallComment: judgeComment });
         alert(`Grades for ${teamName} submitted! Score: ${totalScore}/${maxTotalScore}. Ranking will update automatically.`);
-        navigate("/judge/submissions"); // Go back to the list
+        navigate("/judge/submissions");
     };
 
     if (!isJudge) {
@@ -83,8 +60,6 @@ export default function JudgeGradingView() {
             <p className="grading-subtitle">Live Grading System - Enter scores based on the hackathon rubric.</p>
 
             <form onSubmit={handleSubmitGrade} className="grading-form">
-                
-                {/* 1. RUBRIC SCORING */}
                 <section className="section rubric-section">
                     <h3 className="section-title">Rubric Criteria Scores</h3>
                     {rubricScores.map(rubric => (
@@ -112,7 +87,6 @@ export default function JudgeGradingView() {
                     ))}
                 </section>
 
-                {/* 2. OVERALL FEEDBACK (Req 3.0) */}
                 <section className="section overall-comment-section">
                     <h3 className="section-title">Overall Feedback (Required)</h3>
                     <textarea
@@ -125,7 +99,6 @@ export default function JudgeGradingView() {
                     />
                 </section>
 
-                {/* 3. SUBMISSION / TOTAL SCORE */}
                 <div className="submission-footer">
                     <div className="total-score-box">
                         Total Score: <span>{totalScore} / {maxTotalScore}</span>

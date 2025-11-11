@@ -1,8 +1,7 @@
-/* Container and Header */
 .updates-container {
     max-width: 900px;
     margin: 40px auto;
-    padding: 25px;
+    padding: 30px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -41,46 +40,46 @@
 .btn-edit-profile {
     display: inline-block;
     padding: 8px 15px;
-    background-color: #4aa3c9;
+    background-color: #65c5e8;
     color: white;
-    border-radius: 4px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
     transition: background-color 0.2s;
 }
 
 .btn-edit-profile:hover {
-    background-color: #388ba3;
+    background-color: #4aa3c9;
 }
 
-/* Sections */
 .section-title {
     font-family: 'OpenSans', sans-serif;
     font-size: 1.4em;
     font-weight: 700;
     color: #1a1a1a;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #65c5e8;
     padding-bottom: 5px;
     margin-bottom: 20px;
 }
 
-/* New Update Form */
 .update-form {
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #eee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .update-textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     resize: vertical;
     margin-bottom: 15px;
-    box-sizing: border-box;
     font-family: 'OpenSans', sans-serif;
+    box-sizing: border-box;
 }
 
 .form-controls {
@@ -98,21 +97,21 @@
 .privacy-select {
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     background-color: white;
     font-family: 'OpenSans', sans-serif;
 }
 
 .post-button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     width: 100%;
     border: none;
     background-color: #65c5e8;
     color: white;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
     transition: background-color 0.2s;
 }
 
@@ -131,18 +130,18 @@
 .update-item {
     background-color: #fff;
     padding: 15px;
-    border-radius: 6px;
+    border-radius: 10px;
     margin-bottom: 15px;
-    border-left: 5px solid #65c5e8; /* Default blue accent */
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #65c5e8;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .update-item.mentor-only {
-    border-left-color: #ffc107; /* Yellow for Mentor Only */
+    border-left-color: #ffc107;
 }
 
 .update-item.private {
-    border-left-color: #dc3545; /* Red for Private */
+    border-left-color: #dc3545;
 }
 
 .update-content {
@@ -170,7 +169,6 @@
     font-style: italic;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 600px) {
     .updates-container {
         padding: 15px;

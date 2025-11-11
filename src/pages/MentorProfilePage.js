@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
 import "./MentorProfilePage.css";
 
-const MENTOR_EMAIL = "mentor@example.com"; 
+const MENTOR_EMAIL = "maria@niagaracollegetoronto.com"; 
 
-// Mock Mentor Profile Data
 const mockMentorProfile = {
-    name: "Chris Evans",
+    name: "Maria Marie",
     email: MENTOR_EMAIL,
     expertise: "Full-Stack Development, Node.js, Cloud Architecture",
     company: "TechNexus Solutions",
@@ -23,20 +22,18 @@ export default function MentorProfilePage() {
 
     useEffect(() => {
         const user = auth.currentUser;
-        
-        // 🚨 ACCESS CONTROL: Must be a Mentor
+
         if (!user || user.email !== MENTOR_EMAIL) {
             navigate("/mentorlogin"); 
             return;
         }
         setIsMentor(true);
         
-        // STUDENT TODO: Fetch real mentor profile data from the backend
     }, [navigate]);
 
     const handleSave = (e) => {
         e.preventDefault();
-        // STUDENT TODO: Send updated profile data to the backend
+
         console.log("Saving mentor profile:", profile);
         alert("Profile updated successfully!");
         setEditMode(false);

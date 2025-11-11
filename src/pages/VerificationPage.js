@@ -74,7 +74,6 @@ export default function VerificationPage() {
       {message && <p className="message">{message}</p>}
       {error && <p className="message">{error}</p>}
 
-      {/* Already Verified Section on Top */}
       <div className="already-verified-section">
         <h2>Already verified?</h2>
         <button className="login-button" onClick={() => navigate('/login')}>

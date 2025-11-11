@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../firebase/config"; // firebase auth
+import { auth } from "../firebase/config"; 
 import { Link } from "react-router-dom";
 import './ResetPasswordPage.css';
 
 export default function ResetPasswordPage() {
-  const [email, setEmail] = useState(""); // email input
-  const [message, setMessage] = useState(""); // feedback message
+  const [email, setEmail] = useState(""); 
+  const [message, setMessage] = useState(""); 
 
-  // handle form submit
   const handleReset = async (e) => {
     e.preventDefault();
     try {

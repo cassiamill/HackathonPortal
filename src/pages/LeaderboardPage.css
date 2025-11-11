@@ -1,25 +1,24 @@
-/* Container and Header based on your theme */
 .leaderboard-container {
     max-width: 800px;
-    margin: 40px auto;
+    margin: 60px auto;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     font-family: 'OpenSans', sans-serif;
     text-align: center;
 }
 
 .leaderboard-title {
     font-family: 'BebasNeue', sans-serif;
-    color: #65c5e8; /* Primary Blue */
+    color: #65c5e8;
     font-size: 3em;
     margin-bottom: 5px;
     letter-spacing: 1.5px;
 }
 
 .leaderboard-subtitle {
-    color: #555;
+    color: #333;
     margin-bottom: 30px;
 }
 
@@ -27,10 +26,9 @@
     text-align: center;
     padding: 50px;
     font-size: 1.2em;
-    color: #6c757d;
+    color: #333;
 }
 
-/* Table Styling (same as previous, themed) */
 .table-wrapper {
     overflow-x: auto;
     margin-bottom: 20px;
@@ -46,28 +44,24 @@
 .leaderboard-table th, .leaderboard-table td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #ddd;
 }
 
 .leaderboard-table th {
-    background-color: #f0f8ff;
-    color: #4aa3c9;
+    background-color: #f8f9fa;
+    color: #65c5e8;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .leaderboard-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
 }
 
 .top-team {
-    background-color: #fffbe6;
+    background-color: #e6f3fb; 
     font-weight: bold;
-    border-left: 5px solid gold;
 }
-.top-team:nth-child(1) { border-left-color: gold; }
-.top-team:nth-child(2) { border-left-color: silver; }
-.top-team:nth-child(3) { border-left-color: #cd7f32; }
 
 .team-score {
     font-weight: 700;
@@ -76,16 +70,15 @@
 
 .leaderboard-footer {
     font-size: 0.85em;
-    color: #6c757d;
+    color: #333;
 }
 
-/* --- Access Denied Styling --- */
 .access-denied-container {
     max-width: 600px;
     margin: 100px auto;
     padding: 40px;
-    background-color: #fff0f0; /* Light red/alert background */
-    border: 1px solid #dc3545;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -93,7 +86,7 @@
 
 .access-denied-title {
     font-family: 'BebasNeue', sans-serif;
-    color: #dc3545; /* Red for alert */
+    color: #65c5e8;
     font-size: 3em;
     margin-bottom: 10px;
     letter-spacing: 1px;

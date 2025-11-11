@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
 import "./PostHackathonReports.css";
 
-// Coordinator check email
-const COORDINATOR_EMAIL = "coordinator@example.com"; 
+const COORDINATOR_EMAIL = "Jonathan@niagaracollegetoronto.com";
 
-// Mock Analytics Data (Req 6.0)
 const mockAnalytics = {
     totalTeams: 30,
-    completionRate: "90%", // Teams that submitted a final project
+    completionRate: "90%",
     avgFinalScore: 82.5,
     participationByCollege: [
         { college: "Niagara College - Toronto", count: 120 },
@@ -21,13 +19,12 @@ const mockAnalytics = {
     ],
 };
 
-// Mock Feedback Summary (Req 7.0)
 const mockFeedback = {
-    averageRating: 4.2, // Out of 5
+    averageRating: 4.2,
     surveyCompletion: "75%",
     themes: [
-        { theme: "Event Organization", feedback: "Excellent communication, but presentation setup was slow." },
-        { theme: "Judging Process", feedback: "Rubrics were clear, but judge feedback was sometimes inconsistent." },
+        { theme: "Event Organization", feedback: "Excellent communication, but setup was slow." },
+        { theme: "Judging Process", feedback: "Rubrics were clear, but feedback was sometimes inconsistent." },
     ],
 };
 
@@ -39,15 +36,11 @@ export default function PostHackathonReports() {
 
     useEffect(() => {
         const user = auth.currentUser;
-        
-        // 🚨 ACCESS CONTROL: Only Coordinators can access reports
         if (!user || user.email !== COORDINATOR_EMAIL) {
-            navigate("/coordinator/dashboard"); // Redirect or show error
+            navigate("/coordinator/dashboard");
             return;
         }
         setIsCoordinator(true);
-        
-        // STUDENT TODO: Fetch final reports and detailed analytics from the backend
     }, [navigate]);
 
     if (!isCoordinator) {
@@ -56,8 +49,10 @@ export default function PostHackathonReports() {
 
     return (
         <div className="reports-container">
-            <h1 className="reports-title">📊 Post-Hackathon Reports & Analytics</h1>
-            <p className="reports-subtitle">Comprehensive data for future event planning and institutional records (Req 6.0, 7.0).</p>
+            <h1 className="reports-title">Post-Hackathon Reports & Analytics</h1>
+            <p className="reports-subtitle">
+                Comprehensive data for future event planning and institutional records.
+            </p>
 
             <section className="section metrics-section">
                 <h2 className="section-title">Key Performance Indicators (KPIs)</h2>
@@ -72,7 +67,7 @@ export default function PostHackathonReports() {
                     </div>
                     <div className="kpi-card">
                         <h3>Average Final Score</h3>
-                        <p className="kpi-value">{analytics.avgFinalScore.toFixed(1)} / 100</p>
+                        <p className="kpi-value">{analytics.avgFinalScore.toFixed(1)}</p>
                     </div>
                     <div className="kpi-card">
                         <h3>Survey Response Rate</h3>
@@ -82,7 +77,7 @@ export default function PostHackathonReports() {
             </section>
 
             <section className="section ranking-section">
-                <h2 className="section-title">Final Team Ranking Summary (Top 2)</h2>
+                <h2 className="section-title">Final Team Ranking Summary</h2>
                 <table className="ranking-table">
                     <thead>
                         <tr>
@@ -102,9 +97,9 @@ export default function PostHackathonReports() {
                     </tbody>
                 </table>
             </section>
-            
+
             <section className="section feedback-section">
-                <h2 className="section-title">Event Feedback Summary (Req 7.0)</h2>
+                <h2 className="section-title">Event Feedback Summary</h2>
                 <div className="feedback-cards">
                     <div className="feedback-overall">
                         <h3>Overall Satisfaction Rating</h3>
@@ -121,7 +116,7 @@ export default function PostHackathonReports() {
 
             <p className="reports-footer">
                 <a href="/api/reports/download/full" className="download-full-report">
-                    Download Full Comprehensive Report (PDF/Excel)
+                    Download Full Report (PDF/Excel)
                 </a>
             </p>
         </div>
