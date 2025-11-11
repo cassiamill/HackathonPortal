@@ -48,16 +48,16 @@ export default function LoginPage() {
 
             switch (role) {
                 case "Coordinator":
-                    navigate("/admin-dashboard"); 
+                    navigate("/admin/dashboard"); 
                     break;
                 case "Judge":
-                    navigate("/judge-dashboard"); 
+                    navigate("/judge/dashboard"); 
                     break;
                 case "Mentor":
-                    navigate("/mentor-dashboard"); 
+                    navigate("/mentor/dashboard"); 
                     break;
                 default:
-                    navigate("/team-selection");
+                    navigate("/student/team-select");
                     break;
             }
 
