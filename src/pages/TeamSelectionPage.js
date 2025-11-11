@@ -39,7 +39,7 @@ export default function TeamFormationPage() {
         await new Promise(resolve => setTimeout(resolve, 1500));
         setMessage(`Welcome to ${pendingInvite.teamName}! Redirecting to your team page.`);
         setPendingInvite(null);
-        setTimeout(() => navigate('/team'), 1000);
+        setTimeout(() => navigate('/student/team'), 1000);
         setIsLoading(false);
     };
 
