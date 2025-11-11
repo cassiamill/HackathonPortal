@@ -32,8 +32,5 @@ node_modules/
 # Optional IDE files
 .vscode/
 
-# Ignore backend folder
-HACKATHON-BACKEND/
-
 #Firebase
 firebase-service-key.json
